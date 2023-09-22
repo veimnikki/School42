@@ -6,13 +6,13 @@
 /*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 19:24:13 by voliinyk          #+#    #+#             */
-/*   Updated: 2023/09/07 16:04:12 by voliinyk         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:37:49 by voliinyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(char ch)
+int	ft_toupper(int ch)
 {
 	if (ch >= 'a' && ch <= 'z')
 		return (ch - 'a' + 'A');

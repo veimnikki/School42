@@ -6,7 +6,7 @@
 /*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:44:46 by voliinyk          #+#    #+#             */
-/*   Updated: 2023/09/07 16:03:33 by voliinyk         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:26:59 by voliinyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char	*d;
-	char	*s;
-	size_t	i;
+	size_t i;
 
-	d = (char *)dest;
-	s = (char *)src;
+	if (!dest && !src)
+		return (0);
 	i = 0;
 	while (i < n)
 	{
-		d[i] = s[i];
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
 		i++;
 	}
 	return (dest);

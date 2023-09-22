@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 13:07:07 by voliinyk          #+#    #+#             */
-/*   Updated: 2023/09/22 14:29:03 by voliinyk         ###   ########.fr       */
+/*   Created: 2023/09/19 15:05:22 by voliinyk          #+#    #+#             */
+/*   Updated: 2023/09/19 15:21:54 by voliinyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	int		length;
-	char	*ptr;
-	int		i;
+	unsigned int	i;
 
-	length = 0;
-	while (s[length])
-		length++;
-	ptr = malloc(sizeof(char) * (length + 1));
-	if (!ptr)
-		return (NULL);
 	i = 0;
-	while (s[i])
+	if (s && f)
 	{
-		ptr[i] = s[i];
-		i++;
+		while (s[i] != '\0')
+		{
+			f(i, &s[i]);
+			i++;
+		}
 	}
-	ptr[i] = '\0';
-	return (ptr);
 }
+
+// void print_character_and_index(unsigned int index, char *c)
+// {
+// 	printf("Character at index %u: %c\n", index, *c);
+// }
 
 // int main()
 // {
-// 	char *str = "hola!";
-// 	printf("%s", ft_strdup(str));
+// 	char str[] = "Hello!";
+// 	ft_striteri(str, print_character_and_index);
 // 	return 0;
 // }

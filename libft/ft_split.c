@@ -6,7 +6,7 @@
 /*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:48:30 by voliinyk          #+#    #+#             */
-/*   Updated: 2023/09/14 18:03:12 by voliinyk         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:30:10 by voliinyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**ft_split(char const *s, char c)
 	size_t	j;
 	size_t	k;
 
-	strs = (char **)malloc(sizeof(char) * (sep_found(s, c) + 1));
+	strs = (char **)malloc(sizeof(char *) * (sep_found(s, c) + 1));
 	if (!strs)
 		return (NULL);
 	i = 0;
@@ -79,35 +79,18 @@ char	**ft_split(char const *s, char c)
 	return (strs);
 }
 
-void	free_split_result(char **strs)
-{
-	int	i;
-
-	i = 0;
-	if (strs)
-	{
-		while (strs[i] != NULL)
-		{
-			free(strs[i]);
-			i++;
-		}
-		free(strs);
-	}
-}
-
-int main(void)
-{
-	char *str = "hello world! wassup?";
-	char **split_result = ft_split(str, ' ');
-	if (!split_result)
-	{
-		printf("Memory allocation error\n");
-		return 1;
-	}
-	for (int i = 0; split_result[i] != NULL; i++)
-	{
-		printf("%s\n", split_result[i]);
-	}
-	free_split_result(split_result);
-	return 0;
-}
+// int main(void)
+// {
+// 	char *str = "hello world! wassup?";
+// 	char **split_result = ft_split(str, ' ');
+// 	if (!split_result)
+// 	{
+// 		printf("Memory allocation error\n");
+// 		return 1;
+// 	}
+// 	for (int i = 0; split_result[i] != NULL; i++)
+// 	{
+// 		printf("%s\n", split_result[i]);
+// 	}
+// 	return 0;
+// }

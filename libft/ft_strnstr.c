@@ -6,7 +6,7 @@
 /*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:08:05 by voliinyk          #+#    #+#             */
-/*   Updated: 2023/09/12 16:46:11 by voliinyk         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:30:08 by voliinyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	j;
 
 	i = 0;
-	if (little == NULL || *little == '\0')
-		return ((char *)big);
+	if (!big)
+		return (NULL);
+	if (little[i] == '\0')
+		return ((char *)&big[i]);
 	while (big[i] && i < len)
 	{
 		j = 0;
@@ -34,12 +36,12 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	return (NULL);
 }
 
-// int main()
-// {
-// 	const char *largestring = "Foo Bar Baz";
-// 	const char *smallstring = "Bar";
-// 	char *ptr;
-// 	ptr = ft_strnstr(largestring, smallstring, 8);
-// 	printf("%s", ptr);
-// 	return 0;
-// }
+int main()
+{
+	const char *largestring = "Foo Bar Baz";
+	const char *smallstring = "";
+	char *ptr;
+	ptr = ft_strnstr(largestring, smallstring, 8);
+	printf("%s", ptr);
+	return 0;
+}

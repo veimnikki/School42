@@ -6,7 +6,7 @@
 /*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 21:46:03 by voliinyk          #+#    #+#             */
-/*   Updated: 2023/09/12 13:06:41 by voliinyk         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:30:10 by voliinyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	*ft_memchr(const void *str, int c, size_t n)
 
 	ptr = str;
 	i = 0;
-	while (i < n && ptr[i] != '\0')
+	while (i < n)
 	{
 		if (ptr[i] == (unsigned char)c)
 			return ((void *)&ptr[i]);
+		if (ptr[i] == '\0')
+			break;
 		i++;
 	}
 	return (NULL);

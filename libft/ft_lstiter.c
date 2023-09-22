@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 13:07:07 by voliinyk          #+#    #+#             */
-/*   Updated: 2023/09/22 14:29:03 by voliinyk         ###   ########.fr       */
+/*   Created: 2023/09/19 17:51:10 by voliinyk          #+#    #+#             */
+/*   Updated: 2023/09/19 18:02:49 by voliinyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int		length;
-	char	*ptr;
-	int		i;
+	t_list	*curr;
 
-	length = 0;
-	while (s[length])
-		length++;
-	ptr = malloc(sizeof(char) * (length + 1));
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (s[i])
+	curr = lst;
+	while (curr != NULL)
 	{
-		ptr[i] = s[i];
-		i++;
+		(*f)(curr->content);
+		curr = curr->next;
 	}
-	ptr[i] = '\0';
-	return (ptr);
 }
-
-// int main()
-// {
-// 	char *str = "hola!";
-// 	printf("%s", ft_strdup(str));
-// 	return 0;
-// }

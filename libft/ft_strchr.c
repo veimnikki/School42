@@ -6,7 +6,7 @@
 /*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 20:14:27 by voliinyk          #+#    #+#             */
-/*   Updated: 2023/09/08 17:27:43 by voliinyk         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:11:51 by voliinyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*ft_strchr(const char *str, int c)
 	i = 0;
 	while (str[i] != '\0' && str[i] != c)
 		i++;
-	if (str[i] == '\0')
-		return (NULL);
-	return ((char *)&str[i]);
+	if (str[i] == c)
+		return ((char *)&str[i]);
+	return (NULL);
 }
 
 // int main (void)

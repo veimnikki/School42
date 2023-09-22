@@ -6,7 +6,7 @@
 /*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 20:49:53 by voliinyk          #+#    #+#             */
-/*   Updated: 2023/09/08 17:27:41 by voliinyk         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:15:48 by voliinyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,19 @@
 char	*ft_strrchr(const char *str, int c)
 {
 	int	i;
-	int	j;
 
-	j = 0;
-	i = ft_strlen(str) - 1;
-	while (str[j] != '\0' && str[i] != c)
+	i = ft_strlen(str);
+	while (i >= 0)
 	{
+		if (str[i] == c)
+			return ((char *)&str[i]);
 		i--;
-		j++;
 	}
-	if (i == 0)
-		return (NULL);
-	return ((char *)&str[i]);
+	return (NULL);
 }
 
 // int main (void)
 // {
-// 	printf("%s", ft_strrchr("ee", 'e'));
+// 	printf("%s", ft_strrchr("yey, hello", 'e'));
 // 	return 0;
+// }
