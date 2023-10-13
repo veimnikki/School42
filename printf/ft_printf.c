@@ -1,55 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/25 16:52:42 by voliinyk          #+#    #+#             */
+/*   Updated: 2023/10/13 13:33:42 by voliinyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
-#include "libft.h"
+#include "./libft/libft.h"
 
-int ft_printchar(int c)
+int	ft_printchar(int c)
 {
-    write (1, &c, 1);
-    return (1);
+	write(1, &c, 1);
+	return (1);
 }
 
-int ft_formats(va_list args, const char format)
+int	ft_formats(va_list args, const char format)
 {
-    int len;
+	int	print_len;
 
-    len = 0;
-    if (format == 'c')
-		len += ft_printchar(va_arg(args, int));
+	print_len = 0;
+	if (format == 'c')
+		print_len += ft_printchar(va_arg(args, int));
 	else if (format == 's')
-		len += ft_printstr(va_arg(args, char *));
+		print_len += ft_printstr(va_arg(args, char *));
 	else if (format == 'p')
-		len += ft_print_ptr(va_arg(args, unsigned long long));
+		print_len += ft_print_ptr(va_arg(args, unsigned long long));
 	else if (format == 'd' || format == 'i')
-		len += ft_printnbr(va_arg(args, int));
+		print_len += ft_printnbr(va_arg(args, int));
 	else if (format == 'u')
-		len += ft_print_unsigned(va_arg(args, unsigned int));
+		print_len += ft_print_unsigned(va_arg(args, unsigned int));
 	else if (format == 'x' || format == 'X')
-		len += ft_print_hex(va_arg(args, unsigned int), format);
+		print_len += ft_print_hex(va_arg(args, unsigned int), format);
 	else if (format == '%')
-		len += ft_printpercent();
-    return (len);
+		print_len += ft_printpercent();
+	return (print_len);
 }
 
-int ft_printf(const char *formats, ...)
+int	ft_printf(const char *str, ...)
 {
-    va_list args; // объявление переменной типа va_list, которая используется для работы с 
-// переменными аргументами функции.
-    int     len;
-    int     i;
+	int		i;
+	va_list	args;
+	int		print_len;
 
-    len = 0;
-    va_start(args, formats);
-    while (formats[i])
-    {
-        if (formats[i] != '%')
-        {
-            len += ft_formats(args, formats[i + 1]);
-            i++;
-        }
-        else
-            len += ft_printchar(formats[i]);
-        i++;
-    }
-    va_end(args);
-    return (len); // Функция возвращает целое число, представляющее общее количество символов, 
-// записанных в стандартный вывод.
+	i = 0;
+	print_len = 0;
+	va_start(args, str);
+	while (str[i])
+	{
+		if (str[i] == '%')
+		{
+			print_len += ft_formats(args, str[i + 1]);
+			i++;
+		}
+		else
+			print_len += ft_printchar(str[i]);
+		i++;
+	}
+	va_end(args);
+	return (print_len);
 }

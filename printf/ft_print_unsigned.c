@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/13 12:45:33 by voliinyk          #+#    #+#             */
+/*   Updated: 2023/10/13 15:05:27 by voliinyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
-#include "libft.h"
+#include "./libft/libft.h"
 
 int	ft_uitoa_len(unsigned int n)
 {
@@ -8,21 +20,18 @@ int	ft_uitoa_len(unsigned int n)
 	len = 0;
 	while (n != 0)
 	{
-	    len++;
+		len++;
 		n = n / 10;
 	}
 	return (len);
 }
 
 char	*ft_uitoa(unsigned int n)
-// Эта функция принимает беззнаковое целое число и преобразует его в строку. Сначала она вызывает 
-// ft_uitoa_len, чтобы узнать, сколько цифр в числе. Затем она выделяет память для строки и 
-// заполняет ее цифрами, начиная с последней цифры числа и переходя к первой.
 {
 	int		len;
 	char	*str;
 
-	len = ft_itoa_len(n);
+	len = ft_uitoa_len(n);
 	str = malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (0);
@@ -36,24 +45,21 @@ char	*ft_uitoa(unsigned int n)
 	return (str);
 }
 
-int ft_print_unsigned(unsigned int n) //  Эта функция принимает беззнаковое целое число и выводит 
-// его на стандартный вывод (в данном случае, на консоль). Если число равно нулю, она выводит 
-// одну цифру "0". В противном случае она вызывает ft_uitoa для преобразования числа в строку, 
-// затем вызывает ft_printstr для вывода этой строки, и освобождает выделенную память.
+int	ft_print_unsigned(unsigned int n)
 {
-    int     print_len;
-    char    *num;
+	int		print_len;
+	char	*num;
 
-    print_len = 0;
-    if (n == 0)
-    {
-        print_len += write(1, "0", 1);
-    }
-    else
-    {
-        num = uitoa(n);
-        print_len += ft_printstr(num);
-        free(num);
-    }
-    return (print_len);
+	print_len = 0;
+	if (n == 0)
+	{
+		print_len += write(1, "0", 1);
+	}
+	else
+	{
+		num = ft_uitoa(n);
+		print_len += ft_printstr(num);
+		free(num);
+	}
+	return (print_len);
 }

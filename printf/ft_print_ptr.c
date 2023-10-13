@@ -1,62 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_ptr.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/02 16:32:55 by voliinyk          #+#    #+#             */
+/*   Updated: 2023/10/13 15:03:24 by voliinyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "./libft/libft.h"
 #include "ft_printf.h"
-#include "libft.h"
 
-// void	ft_putchar_fd(char c, int fd)
-// {
-// 	write(fd, &c, 1);
-// }
-
-int ft_ptrlen(uintptr_t nbr)
-// Эта функция вычисляет длину (количество цифр) данного беззнакового целого числа, представленного 
-// в шестнадцатеричной (16-ричной) системе счисления. Она принимает аргумент num типа uintptr_t, 
-// который является беззнаковым целочисленным типом, способным хранить указатель.
+void	ft_putchar_fd(char c, int fd)
 {
-    int len;
-
-    len = 0;
-    if (nbr != 0)
-    {
-        len++;
-        nbr = nbr/16;
-    }
-    return (len);
+	write(fd, &c, 1);
 }
 
-void    ft_putptr(uintptr_t nbr) // Эта функция рекурсивно выводит беззнаковое целое число (num) 
-// в виде шестнадцатеричного числа.
+int	ft_ptrlen(uintptr_t nbr)
 {
-    if (nbr >= 16)
-    {
-        ft_putptr(nbr / 16); // сначала вывод частного
-        ft_putptr(nbr % 16); // вывод остатка
-    }
-    else
-    {
-        if (nbr <= 9)
-            ft_putchar_fd((nbr + '0'), 1);
-        else
-        {
-            ft_putchar_fd((nbr - 10 + 'a'), 1); // выводит соответствующий шестнадцатеричный 
-// символ (a-f), вычитая 10 из num и добавляя 'a'.
-        }
-    }
+	int	len;
+
+	len = 0;
+	while (nbr != 0)
+	{
+		len++;
+		nbr = nbr / 16;
+	}
+	return (len);
 }
 
-int ft_print_ptr(unsigned long long ptr) // Эта функция отвечает за вывод указателя в формате "0x", 
-// за которым следует шестнадцатеричное представление значения указателя.
+void	ft_putptr(uintptr_t nbr)
 {
-    int print_len;
+	if (nbr >= 16)
+	{
+		ft_putptr(nbr / 16);
+		ft_putptr(nbr % 16);
+	}
+	else
+	{
+		if (nbr <= 9)
+			ft_putchar_fd((nbr + '0'), 1);
+		else
+			ft_putchar_fd((nbr - 10 + 'a'), 1);
+	}
+}
 
-    print_len = 0;
-    print_len += write(1, "0x", 1); // записываем "0x" в стандартный вывод, указывая, 
-// что следующее представление будет в шестнадцатеричной системе счисления.
-    if (ptr == 0)
-        print_len += write (1, "0", 1);
-    else
-    {
-        ft_putptr(ptr);
-        print_len += ft_ptrlen(ptr); // Если ptr не равен нулю, она вызывает ft_put_ptr(ptr) для 
-// вывода шестнадцатеричного представления значения указателя и вычисляет его длину
-    }
-    return (print_len);
+int	ft_print_ptr(unsigned long long ptr)
+{
+	int	print_len;
+
+	print_len = 0;
+	if (ptr == 0)
+		print_len += write(1, "(nil)", 5);
+	else
+	{
+		print_len += write(1, "0x", 2);
+		ft_putptr(ptr);
+		print_len += ft_ptrlen(ptr);
+	}
+	return (print_len);
 }

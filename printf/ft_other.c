@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_other.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: voliinyk <voliinyk@student.42prague.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/02 15:11:14 by voliinyk          #+#    #+#             */
+/*   Updated: 2023/10/13 15:05:20 by voliinyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
-#include "libft.h"
+#include "./libft/libft.h"
 
 void	ft_putstr(char *str)
 {
@@ -13,7 +25,7 @@ void	ft_putstr(char *str)
 	}
 }
 
-int ft_printstr(char *str)
+int	ft_printstr(char *str)
 {
 	int	i;
 
